@@ -67,3 +67,6 @@ build/tmp/
 # Resource cache
 /build/resources/
 /build/tmp/
+
+.intellijPlatform/
+.kotlin/sessions/
