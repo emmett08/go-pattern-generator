@@ -1,42 +1,69 @@
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
+# Gradle build output
+/build/
+/out/
+/target/
+/bin/
 /dist/
-/nbdist/
-/.nb-gradle/
+/tmp/
+/.idea/
+/*.iml
+/*.ipr
+/*.iws
 
-### VS Code ###
-.vscode/
+# Gradle Wrapper
+.gradle/
+/.gradle/
+/gradle/wrapper/gradle-wrapper.jar
+.gradle-cache/
+/.kotlinc/
 
-### Mac OS ###
-.DS_Store
+# IntelliJ IDEA-specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+logs/
+hs_err_pid*
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+*.backup
+
+# JetBrains-specific
+/.idea_modules/
+/.DS_Store
+
+# Certificates and Keys
+*.pem
+*.crt
+*.key
+
+# Reports and caches
+build/
+
+# Ignore coverage, configuration, and verification artifacts
+/reports/
+/kover/
+/configuration-cache/
+/verifyPluginConfiguration/
+
+# IntelliJ Plugin verification files
+build/reports/
+build/tmp/
+
+# Resource cache
+/build/resources/
+/build/tmp/

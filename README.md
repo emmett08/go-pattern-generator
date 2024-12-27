@@ -1,3 +1,4 @@
+<!-- Plugin description -->
 # **Go Pattern Generator Plugin** 🚀
 
 _A plugin that makes your code cleaner, more maintainable, and keeps the demons of complexity at bay._
@@ -171,3 +172,4 @@ Use patterns to create simplicity and never as a crutch. Keep your system clean,
 
 Happy coding,  
 _The Go Pattern Generator Team_ 🚀
+<!-- Plugin description end -->
