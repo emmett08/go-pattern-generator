@@ -70,3 +70,5 @@ build/tmp/
 
 .intellijPlatform/
 .kotlin/sessions/
+
+.run
