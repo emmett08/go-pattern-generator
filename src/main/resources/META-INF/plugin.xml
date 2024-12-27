@@ -29,14 +29,17 @@ This plugin streamlines code generation for common and advanced design patterns,
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <notificationGroup id="Pattern Generator"
+                           displayType="BALLOON"
+                           isLogByDefault="false"
+                           toolWindowId="Build" />
     </extensions>
 
     <actions>
         <group id="GoDesignPatternsGroup" text="Go Design Patterns" popup="true" icon="/META-INF/go.svg">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <!-- Singleton Group -->
-            <group id="SingletonGroup" popup="true" text="Singleton">
+            <!--<group id="SingletonGroup" popup="true" text="Singleton">
                 <add-to-group group-id="GoDesignPatternsGroup" anchor="first"/>
                 <action id="GoDesignMode.actions.SingletonSafeAction" class="com.emmett08.plugins.gopatterngenerator.actions.SingletonSafeAction" text="Singleton(Safe)"
                         description="Singleton mode(safe)">
@@ -53,6 +56,10 @@ This plugin streamlines code generation for common and advanced design patterns,
             </action>
             <action id="GoDesignMode.actions.ProxyAction" class="com.emmett08.plugins.gopatterngenerator.actions.ProxyAction" text="Proxy"
                     description="Proxy mode">
+            </action>-->
+            <action id="GoDesignMode.actions.GeneratePatternAction" class="com.emmett08.plugins.gopatterngenerator.actions.GeneratePatternAction" text="Generate pattern"
+                    description="Generate pattern mode">
+
             </action>
         </group>
     </actions>

@@ -1,4 +1,3 @@
-import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 
 plugins {
@@ -38,6 +37,9 @@ dependencies {
         pluginVerifier()
         zipSigner()
     }
+
+    runtimeOnly("com.jetbrains.intellij.platform:core-ui:243.22562.218")
+    runtimeOnly("com.jetbrains.intellij.platform:core:243.22562.218")
 }
 
 intellijPlatform {
@@ -104,5 +106,12 @@ tasks {
 
     publishPlugin {
         dependsOn(patchChangelog)
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
     }
 }
