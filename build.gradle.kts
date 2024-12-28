@@ -1,4 +1,5 @@
 import org.jetbrains.changelog.markdownToHTML
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
     id("java")
@@ -17,8 +18,10 @@ kotlin {
 
 repositories {
     mavenCentral()
+
     intellijPlatform {
         defaultRepositories()
+        snapshots()
     }
 }
 
@@ -34,12 +37,27 @@ dependencies {
         plugin("org.jetbrains.plugins.go", "243.22562.218")
         plugin("PsiViewer", "251.175")
 
+        testFramework(TestFrameworkType.JUnit5)
+        testFramework(TestFrameworkType.Platform)
+        testFramework(TestFrameworkType.Bundled)
+
         pluginVerifier()
         zipSigner()
     }
 
-    runtimeOnly("com.jetbrains.intellij.platform:core-ui:243.22562.218")
-    runtimeOnly("com.jetbrains.intellij.platform:core:243.22562.218")
+    api(platform("org.junit:junit-bom:5.11.4"))
+    api("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("org.junit.platform:junit-platform-launcher:1.11.4")
+    testRuntimeOnly("org.junit.platform:junit-platform-engine:1.11.4")
+    testImplementation("org.junit.platform:junit-platform-commons:1.11.4")
+
+    testImplementation("org.mockito:mockito-core:5.14.2")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.14.2")
+
+    testImplementation("junit:junit:4.13.2")
 }
 
 intellijPlatform {
@@ -101,17 +119,17 @@ changelog {
 
 tasks {
     wrapper {
-        gradleVersion = providers.gradleProperty("gradleVersion").orNull ?: "8.5"
+        gradleVersion = providers.gradleProperty("gradleVersion").orNull ?: "8.11"
     }
 
     publishPlugin {
         dependsOn(patchChangelog)
     }
-}
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
     }
 }
