@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
     id("org.jetbrains.intellij.platform") version "2.2.1"
     id("org.jetbrains.changelog") version "2.2.1"
-    id("org.jetbrains.kotlinx.kover") version "0.9.0"
+    // id("org.jetbrains.kotlinx.kover") version "0.9.0"
 }
 
 group = "com.emmett08.plugins"
@@ -41,23 +41,31 @@ dependencies {
         testFramework(TestFrameworkType.Platform)
         testFramework(TestFrameworkType.Bundled)
 
+
         pluginVerifier()
         zipSigner()
     }
 
-    api(platform("org.junit:junit-bom:5.11.4"))
-    api("org.junit.jupiter:junit-jupiter-api:5.11.4")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
+    // JUnit and Mockito for tests
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
     testImplementation("org.junit.platform:junit-platform-launcher:1.11.4")
     testRuntimeOnly("org.junit.platform:junit-platform-engine:1.11.4")
     testImplementation("org.junit.platform:junit-platform-commons:1.11.4")
 
     testImplementation("org.mockito:mockito-core:5.14.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("org.mockito:mockito-junit-jupiter:5.14.2")
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.hamcrest:hamcrest:3.0")
+
+    // Apply test dependencies to compileKotlin if needed in main sources
+    implementation("org.hamcrest:hamcrest:3.0")
+    implementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    implementation("org.mockito:mockito-core:5.14.2")
+    implementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
 intellijPlatform {
@@ -109,6 +117,13 @@ intellijPlatform {
             recommended()
         }
     }
+}
+
+intellijPlatformTesting {
+    runIde
+    testIde
+    testIdeUi
+    testIdePerformance
 }
 
 // Changelog configuration
