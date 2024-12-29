@@ -148,3 +148,14 @@ tasks {
         }
     }
 }
+
+tasks.withType(org.gradle.api.tasks.testing.Test::class).configureEach {
+    jvmArgs = (jvmArgs ?: mutableListOf()).toMutableList().apply {
+        addAll(
+            listOf(
+                "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+                "--add-opens", "java.desktop/javax.swing=ALL-UNNAMED"
+            )
+        )
+    }
+}
