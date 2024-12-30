@@ -1,28 +1,23 @@
 package com.emmett08.plugins.gopatterngenerator.generators
 
 class FactoryGenerator : PatternGenerator {
-    override fun generate() = """
+    override fun generate(pattern: String, attributes: List<String>) = """
         package main
 
-        type Shape interface {
-            Draw()
+        type $pattern interface {
+            Create()
         }
 
-        type Circle struct{}
+        type Concrete${pattern} struct{}
 
-        func (c Circle) Draw() {
-            println("Circle Draw")
+        func (c Concrete${pattern}) Create() {
+            println("$pattern created")
         }
 
-        type ShapeFactory struct{}
+        type ${pattern}Factory struct{}
 
-        func (s ShapeFactory) CreateShape(shapeType string) Shape {
-            switch shapeType {
-            case "circle":
-                return Circle{}
-            default:
-                return nil
-            }
+        func (f ${pattern}Factory) Create${pattern}() $pattern {
+            return Concrete${pattern}{}
         }
     """.trimIndent()
 }

@@ -1,16 +1,16 @@
 package com.emmett08.plugins.gopatterngenerator.generators
 
 class SingletonGenerator : PatternGenerator {
-    override fun generate() = """
+    override fun generate(pattern: String, attributes: List<String>) = """
         package main
 
-        var instance *Singleton
+        var instance *${pattern}
 
-        type Singleton struct{}
+        type $pattern struct{}
 
-        func GetInstance() *Singleton {
+        func GetInstance() *${pattern} {
             if instance == nil {
-                instance = &Singleton{}
+                instance = &${pattern}{}
             }
             return instance
         }

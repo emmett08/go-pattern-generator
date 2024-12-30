@@ -1,31 +1,28 @@
 package com.emmett08.plugins.gopatterngenerator.generators
 
 class BuilderGenerator : PatternGenerator {
-    override fun generate() = """
+    override fun generate(pattern: String, attributes: List<String>) = """
         package main
 
-        type Builder struct {
-            part1 string
-            part2 string
+        type $pattern struct {
+            ${attributes.joinToString("\n") { attr -> "$attr string" }}
         }
 
-        func (b *Builder) SetPart1(p string) *Builder {
-            b.part1 = p
-            return b
+        type ${pattern}Builder struct {
+            component $pattern
         }
 
-        func (b *Builder) SetPart2(p string) *Builder {
-            b.part2 = p
-            return b
-        }
+        ${attributes.joinToString("\n") { attr ->
+        """
+            func (cb *${pattern}Builder) Set${attr.replaceFirstChar { it.uppercase() }}(v string) *${pattern}Builder {
+                cb.component.${attr} = v
+                return cb
+            }
+            """.trimIndent()
+    }}
 
-        func (b *Builder) Build() Product {
-            return Product{b.part1, b.part2}
-        }
-
-        type Product struct {
-            part1 string
-            part2 string
+        func (cb *${pattern}Builder) Build() $pattern {
+            return cb.component
         }
     """.trimIndent()
 }

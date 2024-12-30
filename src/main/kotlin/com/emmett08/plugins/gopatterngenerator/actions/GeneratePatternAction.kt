@@ -1,25 +1,20 @@
 package com.emmett08.plugins.gopatterngenerator.actions
 
-import com.emmett08.plugins.gopatterngenerator.generators.PatternGeneratorFactory
-import com.emmett08.plugins.gopatterngenerator.handlers.FileHandler
-import com.emmett08.plugins.gopatterngenerator.ui.PatternSelectionDialog
+import com.emmett08.plugins.gopatterngenerator.core.PatternGenerationHandler
+import com.emmett08.plugins.gopatterngenerator.core.PatternWizardFactory
+import com.emmett08.plugins.gopatterngenerator.ui.DropdownPatternSelector
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.project.guessProjectDir
 
 class GeneratePatternAction : AnAction() {
-    private val generatorFactory = PatternGeneratorFactory()
-    private val fileHandler = FileHandler()
-    private val dialog = PatternSelectionDialog()
+    private val generatorFactory = PatternWizardFactory()
 
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
+        val patternSelector = DropdownPatternSelector(project)
+        val patternHandler = PatternGenerationHandler(patternSelector, generatorFactory)
+        patternHandler.handle(project)
 
-        val selectedPattern = dialog.show(project) ?: return
-        val generator = generatorFactory.createGenerator(selectedPattern)
-        val patternCode = generator.generate()
-
-        val baseDir = project.guessProjectDir()
-        fileHandler.writeToFile(baseDir, patternCode, project)
+        // val baseDir = project.guessProjectDir()
     }
 }
