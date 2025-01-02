@@ -35,7 +35,7 @@ dependencies {
         bundledPlugin("com.intellij.java")
 
         plugin("org.jetbrains.plugins.go", "243.22562.218")
-        plugin("PsiViewer", "251.175")
+        plugin("PsiViewer", "243.7768")
 
         testFramework(TestFrameworkType.JUnit5)
         testFramework(TestFrameworkType.Platform)
@@ -158,4 +158,8 @@ tasks.withType(org.gradle.api.tasks.testing.Test::class).configureEach {
             )
         )
     }
+}
+
+tasks.withType<JavaExec> {
+    jvmArgs("-Xshare:off")
 }
